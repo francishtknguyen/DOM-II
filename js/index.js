@@ -30,15 +30,11 @@ Array.from(navLinks).forEach(link => {
 });
 
 // Type 2
-header.querySelector("h1").addEventListener('click', event => {
-    header.querySelector("h1").style.color = "green";
-    header.querySelector("h1").style.background = "black";
+header.addEventListener('click', event => {
+    
+    event.target.style.color = "green";
+    event.target.style.background = "black";
 });
-
-// header.querySelector("h1").addEventListener('dbclick', event => {
-//     header.querySelector("h1").style.color = "black";
-//     header.querySelector("h1").style.background = "white";
-// });
 
 
 // Type 3
@@ -73,11 +69,14 @@ Array.from(navLinks).forEach(link => {
 
 // Type 7
 
-header.addEventListener('keydown', event => {
-    if(event.key === 'p') {
-        header.style.background = "aqua";
-    }
-});
+const paragraphs = document.querySelectorAll("p");
+
+Array.from(paragraphs).forEach(content => {
+    content.addEventListener('copy', event => {
+        event.target.style.fontWeight = "bold";
+    })
+})
+
 
 // Type 8
 const h2 = document.querySelectorAll(".container h2");
@@ -100,12 +99,31 @@ Array.from(buttons).forEach( button => {
 
 //Type 10
 
-const paragraphs = document.querySelectorAll("p");
+document.addEventListener('keydown', event => {
+    if(event.key === 'p') {
+        header.style.background = "aqua";
+    }
+});
 
-Array.from(paragraphs).forEach(content => {
-    content.addEventListener('copy', event => {
-        event.target.style.fontWeight = "bold";
+
+//stopPropagation
+
+const btn = document.querySelector(".btn");
+const dest = document.querySelector(".destination");
+
+btn.addEventListener('click', event => {
+    alert("button was clicked");
+    event.stopPropagation();
+});
+
+dest.addEventListener('click', event => {
+    alert("box was clicked");
+});
+
+
+//Prevent nav items from refreshing page
+Array.from(document.links).forEach(function(link) {
+    link.addEventListener('click', function(event) {
+        event.preventDefault();
     })
-})
-
-
+});
